@@ -23,32 +23,59 @@ def unfold_list(lista, retorno=[]):
         return retorno
     if isinstance(lista[0], list):
         retorno += unfold_list(lista[0], [])
-    else:
+    elif has_operators(lista[0]) or has_digit(lista[0]):
         retorno.append(lista[0])
     return unfold_list(lista[1:], retorno)
 
 
 def handle_operators(cadena, retorno=[]):
     """ Si encuentra mas de un operador juntos, los separa """
-    if not cadena:
+    if not len(cadena):
         return retorno
     retorno.append(cadena[0])
     return handle_operators(cadena[1:], retorno)
 
 
+def handle_mixed(cadena, index, retorno=[]):
+    if not cadena:
+        return retorno
+    elif len(cadena) == index:
+        retorno.append(cadena)
+        return retorno
+
+    if has_operators(cadena[index]):
+        if not index:
+            retorno.append(cadena[index])
+        else:
+            retorno.append(cadena[:index])
+            retorno.append(cadena[index])
+        return handle_mixed(cadena[index + 1:], 0, retorno)
+
+    else:
+        return handle_mixed(cadena, index + 1, retorno)
+
+
 def splitter(arg):
     """ Funcion que maneja a los operadores y los valores mixtos entre operador y numero """
     try:
-        return float(arg)
+        convercion = float(arg)
+        return convercion
     except ValueError:
-        if has_operators(arg) and not has_digit(arg):
-            return handle_operators(arg)
+        if not has_digit(arg):
+            return handle_operators(arg, [])
+        elif has_digit(arg) and has_operators(arg):
+            return handle_mixed(arg, 0, [])
         else:
-            print("valores mixtos")
-
+            return ''
 
 def tokenize(expression):
     """ Función encargada de convertir una expresión en una lista de tokens """
     tokens = expression.split(' ')
+    print(tokens)
     tokens = list(map(splitter, tokens))
     return unfold_list(tokens)
+    # print(tokens)
+
+
+print(tokenize('3+4 *w(2+1)'))
+
