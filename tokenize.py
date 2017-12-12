@@ -1,4 +1,5 @@
 #! /bin/python
+# -*- coding: utf-8 -*-
 """ Tokenizer, convierte una expresión matemática en una lista de tokens """
 
 import re
