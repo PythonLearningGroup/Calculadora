@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from tokenize import tokenize
 import sys
+
+from tokenize import tokenize
+
 
 def validate_token(token):
     return token.isnumeric() or is_operator(token)
+
 
 def validate_tokens(tokens):
     for token in tokens:
@@ -12,8 +15,10 @@ def validate_tokens(tokens):
             return False
     return True
 
+
 def is_operator(character):
     return character == '*' or character == '/' or character == '+' or character == '-'
+
 
 def evaluate(expresion):
     non_valid_expresion_error_message = "expresion inválida"
@@ -34,4 +39,3 @@ if len(sys.argv) > 1:
     evaluate(sys.argv[1])
 else:
     print("usage: calculadora-cli.py <expresion>")
-    
