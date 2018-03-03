@@ -6,6 +6,7 @@ from tkinter import ttk
 ventana = tk.Tk()
 ventana.geometry("240x240")
 ventana.title("CALCULADORA")
+ventana.resizable(0, 0)
 
 # #################### FRAMES #################### #
 
@@ -34,10 +35,19 @@ cero_frame.grid(column=0, row=9)
 # #################### lOGICA ####################
 
 def add(d):
+    '''
+    Toma el valor que le asigna al parametro d el evento de presionar uno de los botones
+    y los inserta en el widget display
+    :param d: string datos asignado al presionar un boton.
+    '''
     display.insert(99, d)
 
 
 def calculate(exprecion):
+    '''
+    Usa el modulo calculadora_cli para evaluar mediante evaluate(exprecion) la exprecion asignada
+    :param exprecion:  String a ser evaluada
+    '''
     data = calcu.evaluate(exprecion)
     print("data")
     print(data)
