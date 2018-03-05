@@ -4,13 +4,13 @@ from tkinter import ttk
 
 # #################### configuracion ventana principal #################### #
 ventana = tk.Tk()
-ventana.geometry("240x240")
+ventana.geometry("220x240")
 ventana.title("CALCULADORA")
 ventana.resizable(0, 0)
-
 # #################### FRAMES #################### #
 
 parent_frame = ttk.Frame(ventana)
+parent_frame.pack_propagate(0)
 parent_frame.grid(column=0, row=0)
 
 display_frame = ttk.Frame(parent_frame)
