@@ -4,7 +4,6 @@ from tkinter import ttk
 
 # #################### configuracion ventana principal #################### #
 ventana = tk.Tk()
-ventana.geometry("220x240")
 ventana.title("CALCULADORA")
 ventana.resizable(0, 0)
 # #################### FRAMES #################### #
